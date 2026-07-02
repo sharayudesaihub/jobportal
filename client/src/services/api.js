@@ -1,8 +1,10 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://localhost:5000/api",
+  baseURL: "https://jobportal-api-smzv.onrender.com/api",
 });
+
+export default API;
 
 API.interceptors.request.use((config) => {
 
