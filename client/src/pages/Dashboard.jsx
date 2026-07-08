@@ -6,6 +6,8 @@ import {
   Search,
   User,
   RefreshCw,
+  ArrowRight,
+  Sparkles,
 } from "lucide-react";
 
 import { motion } from "framer-motion";
@@ -59,14 +61,16 @@ function Dashboard({
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600">
+    <div className="min-h-screen bg-slate-100">
+
       <Navbar
         darkMode={darkMode}
         setDarkMode={setDarkMode}
       />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-10">
-        {/* Welcome Section */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12">
+
+        {/* Welcome Card */}
 
         <motion.div
           initial={{
@@ -77,26 +81,84 @@ function Dashboard({
             opacity: 1,
             y: 0,
           }}
-          className="bg-white/10 backdrop-blur-xl rounded-3xl shadow-2xl p-6 sm:p-8 mb-10 border border-white/20"
+          className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 rounded-3xl p-8 text-white shadow-2xl"
         >
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight">
-            Welcome back,
-            <span className="text-yellow-300">
-              {" "}
-              {user?.name}
-            </span>
-            👋
-          </h1>
 
-          <p className="text-white/80 mt-4 text-base sm:text-lg">
-            Manage your profile, explore jobs and keep track of your
-            applications from one place.
-          </p>
+          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8">
+
+            <div>
+
+              <p className="text-lg text-white/80">
+
+                Welcome Back 👋
+
+              </p>
+
+              <h1 className="text-4xl lg:text-5xl font-bold mt-2">
+
+                {user?.name}
+
+              </h1>
+
+              <p className="mt-5 text-white/90 max-w-2xl leading-7">
+
+                Discover new opportunities, manage your applications,
+                and keep your profile updated to increase your chances
+                of getting hired.
+
+              </p>
+
+              <button
+                onClick={() =>
+                  navigate("/jobs")
+                }
+                className="mt-8 bg-white text-purple-700 px-6 py-3 rounded-xl font-bold flex items-center gap-2 hover:scale-105 transition"
+              >
+
+                Browse Jobs
+
+                <ArrowRight size={20} />
+
+              </button>
+
+            </div>
+
+            <div className="bg-white/20 backdrop-blur-xl rounded-3xl p-6 min-w-[260px]">
+
+              <Sparkles
+                size={45}
+                className="mb-4"
+              />
+
+              <p className="text-lg">
+
+                Career Tip
+
+              </p>
+
+              <h2 className="text-2xl font-bold mt-2">
+
+                Complete Your Profile
+
+              </h2>
+
+              <p className="mt-4 text-white/90">
+
+                Recruiters are more likely to contact candidates with
+                complete profiles.
+
+              </p>
+
+            </div>
+
+          </div>
+
         </motion.div>
 
         {/* Search */}
 
-        <div className="relative mb-10 w-full">
+        <div className="relative mt-10">
+
           <Search
             className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-500"
           />
@@ -106,7 +168,9 @@ function Dashboard({
             placeholder="Search jobs..."
             value={search}
             onChange={(e) =>
-              setSearch(e.target.value)
+              setSearch(
+                e.target.value
+              )
             }
             className="
               w-full
@@ -116,183 +180,364 @@ function Dashboard({
               pl-14
               pr-5
               py-4
-              shadow-xl
+              shadow-lg
               outline-none
-              text-base
-              sm:text-lg
+              text-lg
             "
           />
+
         </div>
 
-        {/* Main Cards */}
+        {/* Stats */}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
+
           <motion.div
             whileHover={{
-              scale: 1.03,
+              y: -6,
             }}
-            className="
-              bg-white/10
-              backdrop-blur-xl
-              rounded-3xl
-              p-6
-              sm:p-8
-              text-white
-              shadow-2xl
-              border
-              border-white/20
-            "
+            className="bg-white rounded-3xl shadow-lg p-6"
           >
-            <Briefcase size={48} />
 
-            <h2 className="text-2xl font-semibold mt-6">
+            <div className="flex justify-between items-center">
+
+              <Briefcase
+                size={45}
+                className="text-indigo-600"
+              />
+
+              <span className="text-sm text-gray-500">
+
+                Available
+
+              </span>
+
+            </div>
+
+            <h3 className="text-gray-500 mt-6">
+
               Total Jobs
-            </h2>
 
-            <p className="text-4xl sm:text-5xl lg:text-6xl font-bold mt-4">
+            </h3>
+
+            <p className="text-5xl font-bold text-gray-800 mt-2">
+
               {stats.totalJobs}
+
             </p>
+
           </motion.div>
 
           <motion.div
             whileHover={{
-              scale: 1.03,
+              y: -6,
             }}
-            className="
-              bg-white/10
-              backdrop-blur-xl
-              rounded-3xl
-              p-6
-              sm:p-8
-              text-white
-              shadow-2xl
-              border
-              border-white/20
-            "
+            className="bg-white rounded-3xl shadow-lg p-6"
           >
-            <Users size={48} />
 
-            <h2 className="text-2xl font-semibold mt-6">
+            <div className="flex justify-between items-center">
+
+              <Users
+                size={45}
+                className="text-pink-600"
+              />
+
+              <span className="text-sm text-gray-500">
+
+                Applied
+
+              </span>
+
+            </div>
+
+            <h3 className="text-gray-500 mt-6">
+
               Applications
-            </h2>
 
-            <p className="text-4xl sm:text-5xl lg:text-6xl font-bold mt-4">
+            </h3>
+
+            <p className="text-5xl font-bold text-gray-800 mt-2">
+
               {stats.totalApplications}
+
             </p>
+
           </motion.div>
+
+          <motion.div
+            whileHover={{
+              y: -6,
+            }}
+            className="bg-white rounded-3xl shadow-lg p-6"
+          >
+
+            <div className="flex justify-between items-center">
+
+              <User
+                size={45}
+                className="text-green-600"
+              />
+
+              <span className="text-sm text-green-600 font-semibold">
+
+                Complete
+
+              </span>
+
+            </div>
+
+            <h3 className="text-gray-500 mt-6">
+
+              Profile Status
+
+            </h3>
+
+            <p className="text-5xl font-bold text-gray-800 mt-2">
+
+              100%
+
+            </p>
+
+          </motion.div>
+
         </div>
 
-        {/* Quick Actions */}
+        {/* ---------- PART 2 STARTS FROM HERE ---------- */}
+                {/* Quick Actions */}
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
-          <button
-            onClick={() =>
-              navigate("/jobs")
-            }
-            className="bg-white text-purple-700 rounded-2xl py-4 sm:py-5 text-lg sm:text-xl font-bold shadow-xl hover:scale-105 transition"
-          >
-            Browse Jobs
-          </button>
+        <div className="mt-12">
 
-          <button
-            onClick={() =>
-              navigate("/profile")
-            }
-            className="bg-white text-purple-700 rounded-2xl py-4 sm:py-5 text-lg sm:text-xl font-bold shadow-xl hover:scale-105 transition"
-          >
-            My Profile
-          </button>
+          <h2 className="text-3xl font-bold text-gray-800 mb-6">
 
-          <button
-            onClick={fetchStats}
-            className="bg-white text-purple-700 rounded-2xl py-4 sm:py-5 text-lg sm:text-xl font-bold shadow-xl hover:scale-105 transition flex justify-center items-center gap-3"
-          >
-            <RefreshCw />
+            Quick Actions
 
-            Refresh
-          </button>
-        </div>
-                {/* Motivation Banner */}
-
-        <motion.div
-          initial={{
-            opacity: 0,
-          }}
-          animate={{
-            opacity: 1,
-          }}
-          transition={{
-            delay: 0.3,
-          }}
-          className="bg-gradient-to-r from-yellow-400 to-orange-500 rounded-3xl p-6 sm:p-8 mt-10 shadow-2xl"
-        >
-          <h2 className="text-2xl sm:text-3xl font-bold text-white">
-            Keep Growing 🚀
           </h2>
 
-          <p className="text-white text-base sm:text-lg mt-4">
-            Complete your profile, explore new opportunities and apply
-            regularly to increase your chances of getting hired.
-          </p>
-        </motion.div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
-        {/* Extra Stats */}
+            <motion.button
+              whileHover={{ scale: 1.03 }}
+              onClick={() => navigate("/jobs")}
+              className="bg-white rounded-3xl shadow-lg p-8 text-left"
+            >
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
-          <motion.div
-            whileHover={{
-              scale: 1.03,
-            }}
-            className="bg-white/10 backdrop-blur-xl rounded-3xl p-6 text-white shadow-xl border border-white/20"
-          >
-            <User size={40} />
+              <Briefcase
+                size={45}
+                className="text-indigo-600 mb-5"
+              />
 
-            <h3 className="text-xl mt-4">
-              Profile Status
-            </h3>
+              <h3 className="text-2xl font-bold text-gray-800">
 
-            <p className="text-4xl sm:text-5xl font-bold mt-3">
-              100%
-            </p>
-          </motion.div>
+                Browse Jobs
 
-          <motion.div
-            whileHover={{
-              scale: 1.03,
-            }}
-            className="bg-white/10 backdrop-blur-xl rounded-3xl p-6 text-white shadow-xl border border-white/20"
-          >
-            <Briefcase size={40} />
+              </h3>
 
-            <h3 className="text-xl mt-4">
-              Active Jobs
-            </h3>
+              <p className="text-gray-500 mt-3">
 
-            <p className="text-4xl sm:text-5xl font-bold mt-3">
-              {stats.totalJobs}
-            </p>
-          </motion.div>
+                Explore new opportunities matching your skills.
 
-          <motion.div
-            whileHover={{
-              scale: 1.03,
-            }}
-            className="bg-white/10 backdrop-blur-xl rounded-3xl p-6 text-white shadow-xl border border-white/20"
-          >
-            <Users size={40} />
+              </p>
 
-            <h3 className="text-xl mt-4">
-              Total Applications
-            </h3>
+            </motion.button>
 
-            <p className="text-4xl sm:text-5xl font-bold mt-3">
-              {stats.totalApplications}
-            </p>
-          </motion.div>
+            <motion.button
+              whileHover={{ scale: 1.03 }}
+              onClick={() => navigate("/profile")}
+              className="bg-white rounded-3xl shadow-lg p-8 text-left"
+            >
+
+              <User
+                size={45}
+                className="text-purple-600 mb-5"
+              />
+
+              <h3 className="text-2xl font-bold text-gray-800">
+
+                My Profile
+
+              </h3>
+
+              <p className="text-gray-500 mt-3">
+
+                Update your profile and improve visibility.
+
+              </p>
+
+            </motion.button>
+
+            <motion.button
+              whileHover={{ scale: 1.03 }}
+              onClick={fetchStats}
+              className="bg-white rounded-3xl shadow-lg p-8 text-left"
+            >
+
+              <RefreshCw
+                size={45}
+                className="text-green-600 mb-5"
+              />
+
+              <h3 className="text-2xl font-bold text-gray-800">
+
+                Refresh
+
+              </h3>
+
+              <p className="text-gray-500 mt-3">
+
+                Reload the latest dashboard statistics.
+
+              </p>
+
+            </motion.button>
+
+          </div>
+
         </div>
+
+        {/* Career Progress */}
+
+        <div className="mt-12 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-3xl shadow-xl p-8 text-white">
+
+          <h2 className="text-3xl font-bold">
+
+            Career Progress 🚀
+
+          </h2>
+
+          <p className="mt-3 text-white/90">
+
+            Keep improving your profile to attract recruiters.
+
+          </p>
+
+          <div className="grid md:grid-cols-3 gap-6 mt-8">
+
+            <div className="bg-white/15 rounded-2xl p-6">
+
+              <h3 className="font-bold text-xl">
+
+                ✅ Profile
+
+              </h3>
+
+              <p className="mt-3">
+
+                Completed
+
+              </p>
+
+            </div>
+
+            <div className="bg-white/15 rounded-2xl p-6">
+
+              <h3 className="font-bold text-xl">
+
+                📄 Applications
+
+              </h3>
+
+              <p className="mt-3">
+
+                {stats.totalApplications} Submitted
+
+              </p>
+
+            </div>
+
+            <div className="bg-white/15 rounded-2xl p-6">
+
+              <h3 className="font-bold text-xl">
+
+                💼 Jobs Available
+
+              </h3>
+
+              <p className="mt-3">
+
+                {stats.totalJobs} Openings
+
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        {/* Recent Activity */}
+
+        <div className="mt-12">
+
+          <h2 className="text-3xl font-bold text-gray-800 mb-6">
+
+            Recent Activity
+
+          </h2>
+
+          <div className="bg-white rounded-3xl shadow-lg p-8">
+
+            <div className="border-l-4 border-indigo-600 pl-5 py-3">
+
+              <h3 className="font-semibold text-lg text-gray-800">
+
+                Dashboard Loaded
+
+              </h3>
+
+              <p className="text-gray-500">
+
+                Your latest statistics have been loaded successfully.
+
+              </p>
+
+            </div>
+
+            <div className="border-l-4 border-pink-600 pl-5 py-3 mt-6">
+
+              <h3 className="font-semibold text-lg text-gray-800">
+
+                Applications
+
+              </h3>
+
+              <p className="text-gray-500">
+
+                Total Applications:
+                {" "}
+                {stats.totalApplications}
+
+              </p>
+
+            </div>
+
+            <div className="border-l-4 border-green-600 pl-5 py-3 mt-6">
+
+              <h3 className="font-semibold text-lg text-gray-800">
+
+                Jobs Available
+
+              </h3>
+
+              <p className="text-gray-500">
+
+                Total Jobs:
+                {" "}
+                {stats.totalJobs}
+
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
       </div>
+
     </div>
+
   );
+
 }
 
 export default Dashboard;
