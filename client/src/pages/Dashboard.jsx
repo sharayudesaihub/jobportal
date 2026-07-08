@@ -57,7 +57,7 @@ function Dashboard({
 
       const res =
         await API.get(
-          "/jobs/stats",
+          "/jobs/seeker-stats",
           {
             headers: {
               Authorization: token,

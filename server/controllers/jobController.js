@@ -293,3 +293,34 @@ exports.dashboardStats = async (req, res) => {
   }
 
 };
+
+// ==============================
+// Seeker Dashboard Stats
+// ==============================
+exports.seekerDashboardStats = async (req, res) => {
+
+  try {
+
+    // Total jobs available
+    const totalJobs = await Job.countDocuments();
+
+    // Jobs applied by current seeker
+    const totalApplications =
+      await Application.countDocuments({
+        applicantId: req.user.userId
+      });
+
+    res.json({
+      totalJobs,
+      totalApplications
+    });
+
+  } catch (error) {
+
+    res.status(500).json({
+      message: error.message
+    });
+
+  }
+
+};

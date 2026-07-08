@@ -12,6 +12,7 @@ const {
   getApplicants,
   getApplicantsByJob,
   dashboardStats,
+  seekerDashboardStats,
   deleteJob,
   updateJob
 } = require("../controllers/jobController");
@@ -76,6 +77,12 @@ router.get(
   "/stats",
   authMiddleware,
   dashboardStats
+);
+
+router.get(
+  "/seeker-stats",
+  authMiddleware,
+  seekerDashboardStats
 );
 
 // ===============================
