@@ -8,11 +8,15 @@ import {
   RefreshCw,
   ArrowRight,
   Sparkles,
+  TrendingUp,
 } from "lucide-react";
 
 import { motion } from "framer-motion";
 
-import { useEffect, useState } from "react";
+import {
+  useEffect,
+  useState,
+} from "react";
 
 import { useNavigate } from "react-router-dom";
 
@@ -22,97 +26,115 @@ function Dashboard({
   darkMode,
   setDarkMode,
 }) {
+
   const navigate = useNavigate();
 
   const user = JSON.parse(
     localStorage.getItem("user")
   );
 
-  const [stats, setStats] = useState({
-    totalJobs: 0,
-    totalApplications: 0,
-  });
+  const [stats, setStats] =
+    useState({
+      totalJobs: 0,
+      totalApplications: 0,
+    });
 
   const [search, setSearch] =
     useState("");
 
   useEffect(() => {
+
     fetchStats();
+
   }, []);
 
   const fetchStats = async () => {
+
     try {
+
       const token =
         localStorage.getItem("token");
 
-      const res = await API.get(
-        "/jobs/stats",
-        {
-          headers: {
-            Authorization: token,
-          },
-        }
-      );
+      const res =
+        await API.get(
+          "/jobs/stats",
+          {
+            headers: {
+              Authorization: token,
+            },
+          }
+        );
 
       setStats(res.data);
+
     } catch (error) {
+
       console.log(error);
+
     }
+
   };
 
   return (
-    <div className="min-h-screen bg-slate-100">
+
+    <div className="min-h-screen bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600">
 
       <Navbar
         darkMode={darkMode}
         setDarkMode={setDarkMode}
       />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-10">
 
-        {/* Welcome Card */}
+        {/* Welcome */}
 
         <motion.div
+
           initial={{
             opacity: 0,
             y: -40,
           }}
+
           animate={{
             opacity: 1,
             y: 0,
           }}
-          className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 rounded-3xl p-8 text-white shadow-2xl"
+
+          className="bg-white/10 backdrop-blur-xl rounded-3xl border border-white/20 shadow-2xl p-8"
+
         >
 
-          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8">
+          <div className="flex flex-col lg:flex-row justify-between gap-8">
 
             <div>
 
-              <p className="text-lg text-white/80">
+              <p className="text-white/80 text-lg">
 
                 Welcome Back 👋
 
               </p>
 
-              <h1 className="text-4xl lg:text-5xl font-bold mt-2">
+              <h1 className="text-4xl lg:text-5xl font-bold text-white mt-2">
 
                 {user?.name}
 
               </h1>
 
-              <p className="mt-5 text-white/90 max-w-2xl leading-7">
+              <p className="text-white/90 mt-5 max-w-2xl leading-7">
 
-                Discover new opportunities, manage your applications,
-                and keep your profile updated to increase your chances
-                of getting hired.
+                Discover new career opportunities, manage your applications,
+                and build a professional profile that stands out to recruiters.
 
               </p>
 
               <button
+
                 onClick={() =>
                   navigate("/jobs")
                 }
+
                 className="mt-8 bg-white text-purple-700 px-6 py-3 rounded-xl font-bold flex items-center gap-2 hover:scale-105 transition"
+
               >
 
                 Browse Jobs
@@ -123,29 +145,22 @@ function Dashboard({
 
             </div>
 
-            <div className="bg-white/20 backdrop-blur-xl rounded-3xl p-6 min-w-[260px]">
+            <div className="bg-white/15 rounded-3xl p-6 border border-white/20 lg:w-80">
 
               <Sparkles
                 size={45}
-                className="mb-4"
+                className="text-yellow-300 mb-4"
               />
 
-              <p className="text-lg">
+              <h2 className="text-2xl font-bold text-white">
 
                 Career Tip
 
-              </p>
-
-              <h2 className="text-2xl font-bold mt-2">
-
-                Complete Your Profile
-
               </h2>
 
-              <p className="mt-4 text-white/90">
+              <p className="text-white/90 mt-4">
 
-                Recruiters are more likely to contact candidates with
-                complete profiles.
+                Apply consistently and keep your profile updated to improve your chances of getting shortlisted.
 
               </p>
 
@@ -164,26 +179,19 @@ function Dashboard({
           />
 
           <input
+
             type="text"
+
             placeholder="Search jobs..."
+
             value={search}
-            onChange={(e) =>
-              setSearch(
-                e.target.value
-              )
+
+            onChange={(e)=>
+              setSearch(e.target.value)
             }
-            className="
-              w-full
-              lg:w-2/3
-              bg-white
-              rounded-2xl
-              pl-14
-              pr-5
-              py-4
-              shadow-lg
-              outline-none
-              text-lg
-            "
+
+            className="w-full lg:w-2/3 bg-white rounded-2xl pl-14 pr-5 py-4 shadow-xl outline-none text-lg"
+
           />
 
         </div>
@@ -193,108 +201,120 @@ function Dashboard({
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
 
           <motion.div
+
             whileHover={{
-              y: -6,
+              y:-5
             }}
-            className="bg-white rounded-3xl shadow-lg p-6"
+
+            className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl shadow-xl p-6 text-white"
+
           >
 
             <div className="flex justify-between items-center">
 
               <Briefcase
                 size={45}
-                className="text-indigo-600"
               />
 
-              <span className="text-sm text-gray-500">
-
-                Available
-
-              </span>
+              <TrendingUp />
 
             </div>
 
-            <h3 className="text-gray-500 mt-6">
+            <p className="mt-6 text-white/80">
 
               Total Jobs
 
-            </h3>
+            </p>
 
-            <p className="text-5xl font-bold text-gray-800 mt-2">
+            <h2 className="text-5xl font-bold mt-2">
 
               {stats.totalJobs}
+
+            </h2>
+
+            <p className="mt-3 text-white/70">
+
+              Jobs available for you
 
             </p>
 
           </motion.div>
 
           <motion.div
+
             whileHover={{
-              y: -6,
+              y:-5
             }}
-            className="bg-white rounded-3xl shadow-lg p-6"
+
+            className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl shadow-xl p-6 text-white"
+
           >
 
             <div className="flex justify-between items-center">
 
               <Users
                 size={45}
-                className="text-pink-600"
               />
 
-              <span className="text-sm text-gray-500">
-
-                Applied
-
-              </span>
+              <TrendingUp />
 
             </div>
 
-            <h3 className="text-gray-500 mt-6">
+            <p className="mt-6 text-white/80">
 
               Applications
 
-            </h3>
+            </p>
 
-            <p className="text-5xl font-bold text-gray-800 mt-2">
+            <h2 className="text-5xl font-bold mt-2">
 
               {stats.totalApplications}
+
+            </h2>
+
+            <p className="mt-3 text-white/70">
+
+              Applications submitted
 
             </p>
 
           </motion.div>
 
           <motion.div
+
             whileHover={{
-              y: -6,
+              y:-5
             }}
-            className="bg-white rounded-3xl shadow-lg p-6"
+
+            className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl shadow-xl p-6 text-white"
+
           >
 
             <div className="flex justify-between items-center">
 
               <User
                 size={45}
-                className="text-green-600"
               />
 
-              <span className="text-sm text-green-600 font-semibold">
-
-                Complete
-
-              </span>
+              <TrendingUp />
 
             </div>
 
-            <h3 className="text-gray-500 mt-6">
+            <p className="mt-6 text-white/80">
 
               Profile Status
 
-            </h3>
+            </p>
 
-            <p className="text-5xl font-bold text-gray-800 mt-2">
+            <h2 className="text-5xl font-bold mt-2">
 
               100%
+
+            </h2>
+
+            <p className="mt-3 text-white/70">
+
+              Profile completed
 
             </p>
 
@@ -302,161 +322,172 @@ function Dashboard({
 
         </div>
 
-        {/* ---------- PART 2 STARTS FROM HERE ---------- */}
+        {/* PART 2 STARTS HERE */}
                 {/* Quick Actions */}
 
         <div className="mt-12">
 
-          <h2 className="text-3xl font-bold text-gray-800 mb-6">
+          <h2 className="text-3xl font-bold text-white mb-6">
 
             Quick Actions
 
           </h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-            <motion.button
+            <motion.div
+
               whileHover={{ scale: 1.03 }}
+
               onClick={() => navigate("/jobs")}
-              className="bg-white rounded-3xl shadow-lg p-8 text-left"
+
+              className="cursor-pointer bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-6 shadow-xl"
+
             >
 
-              <Briefcase
-                size={45}
-                className="text-indigo-600 mb-5"
-              />
+              <Briefcase size={45} className="text-white" />
 
-              <h3 className="text-2xl font-bold text-gray-800">
+              <h3 className="text-2xl font-bold text-white mt-5">
 
                 Browse Jobs
 
               </h3>
 
-              <p className="text-gray-500 mt-3">
+              <p className="text-white/80 mt-3">
 
-                Explore new opportunities matching your skills.
+                Explore the latest opportunities from top companies.
 
               </p>
 
-            </motion.button>
+            </motion.div>
 
-            <motion.button
+            <motion.div
+
               whileHover={{ scale: 1.03 }}
+
               onClick={() => navigate("/profile")}
-              className="bg-white rounded-3xl shadow-lg p-8 text-left"
+
+              className="cursor-pointer bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-6 shadow-xl"
+
             >
 
-              <User
-                size={45}
-                className="text-purple-600 mb-5"
-              />
+              <User size={45} className="text-white" />
 
-              <h3 className="text-2xl font-bold text-gray-800">
+              <h3 className="text-2xl font-bold text-white mt-5">
 
                 My Profile
 
               </h3>
 
-              <p className="text-gray-500 mt-3">
+              <p className="text-white/80 mt-3">
 
-                Update your profile and improve visibility.
+                Update your information and improve your visibility.
 
               </p>
 
-            </motion.button>
+            </motion.div>
 
-            <motion.button
+            <motion.div
+
               whileHover={{ scale: 1.03 }}
+
               onClick={fetchStats}
-              className="bg-white rounded-3xl shadow-lg p-8 text-left"
+
+              className="cursor-pointer bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-6 shadow-xl"
+
             >
 
-              <RefreshCw
-                size={45}
-                className="text-green-600 mb-5"
-              />
+              <RefreshCw size={45} className="text-white" />
 
-              <h3 className="text-2xl font-bold text-gray-800">
+              <h3 className="text-2xl font-bold text-white mt-5">
 
                 Refresh
 
               </h3>
 
-              <p className="text-gray-500 mt-3">
+              <p className="text-white/80 mt-3">
 
-                Reload the latest dashboard statistics.
+                Refresh your dashboard and latest statistics.
 
               </p>
 
-            </motion.button>
+            </motion.div>
 
           </div>
 
         </div>
+
+
 
         {/* Career Progress */}
 
-        <div className="mt-12 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-3xl shadow-xl p-8 text-white">
+        <div className="mt-12">
 
-          <h2 className="text-3xl font-bold">
+          <h2 className="text-3xl font-bold text-white mb-6">
 
-            Career Progress 🚀
+            Career Progress
 
           </h2>
 
-          <p className="mt-3 text-white/90">
+          <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-8 shadow-2xl">
 
-            Keep improving your profile to attract recruiters.
+            <div className="grid md:grid-cols-3 gap-8">
 
-          </p>
+              <div>
 
-          <div className="grid md:grid-cols-3 gap-6 mt-8">
+                <h3 className="text-xl font-bold text-green-300">
 
-            <div className="bg-white/15 rounded-2xl p-6">
+                  ✔ Profile Completed
 
-              <h3 className="font-bold text-xl">
+                </h3>
 
-                ✅ Profile
+                <p className="text-white/80 mt-2">
 
-              </h3>
+                  Your profile is ready for recruiters.
 
-              <p className="mt-3">
+                </p>
 
-                Completed
+              </div>
 
-              </p>
+              <div>
 
-            </div>
+                <h3 className="text-xl font-bold text-yellow-300">
 
-            <div className="bg-white/15 rounded-2xl p-6">
+                  📄 Applications
 
-              <h3 className="font-bold text-xl">
+                </h3>
 
-                📄 Applications
+                <p className="text-white/80 mt-2">
 
-              </h3>
+                  Total Submitted:
+                  <span className="font-bold">
+                    {" "}
+                    {stats.totalApplications}
+                  </span>
 
-              <p className="mt-3">
+                </p>
 
-                {stats.totalApplications} Submitted
+              </div>
 
-              </p>
+              <div>
 
-            </div>
+                <h3 className="text-xl font-bold text-cyan-300">
 
-            <div className="bg-white/15 rounded-2xl p-6">
+                  💼 Opportunities
 
-              <h3 className="font-bold text-xl">
+                </h3>
 
-                💼 Jobs Available
+                <p className="text-white/80 mt-2">
 
-              </h3>
+                  Available Jobs:
+                  <span className="font-bold">
+                    {" "}
+                    {stats.totalJobs}
+                  </span>
 
-              <p className="mt-3">
+                </p>
 
-                {stats.totalJobs} Openings
-
-              </p>
+              </div>
 
             </div>
 
@@ -464,65 +495,49 @@ function Dashboard({
 
         </div>
 
-        {/* Recent Activity */}
+
+
+        {/* Latest Updates */}
 
         <div className="mt-12">
 
-          <h2 className="text-3xl font-bold text-gray-800 mb-6">
+          <h2 className="text-3xl font-bold text-white mb-6">
 
-            Recent Activity
+            Latest Updates
 
           </h2>
 
-          <div className="bg-white rounded-3xl shadow-lg p-8">
+          <div className="grid md:grid-cols-2 gap-6">
 
-            <div className="border-l-4 border-indigo-600 pl-5 py-3">
+            <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-6 shadow-xl">
 
-              <h3 className="font-semibold text-lg text-gray-800">
+              <h3 className="text-xl font-bold text-white">
 
-                Dashboard Loaded
+                🚀 Stay Active
 
               </h3>
 
-              <p className="text-gray-500">
+              <p className="text-white/80 mt-4 leading-7">
 
-                Your latest statistics have been loaded successfully.
+                Regularly apply for jobs and keep your profile updated.
+                Recruiters are more likely to contact active candidates.
 
               </p>
 
             </div>
 
-            <div className="border-l-4 border-pink-600 pl-5 py-3 mt-6">
+            <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-6 shadow-xl">
 
-              <h3 className="font-semibold text-lg text-gray-800">
+              <h3 className="text-xl font-bold text-white">
 
-                Applications
-
-              </h3>
-
-              <p className="text-gray-500">
-
-                Total Applications:
-                {" "}
-                {stats.totalApplications}
-
-              </p>
-
-            </div>
-
-            <div className="border-l-4 border-green-600 pl-5 py-3 mt-6">
-
-              <h3 className="font-semibold text-lg text-gray-800">
-
-                Jobs Available
+                💡 Pro Tip
 
               </h3>
 
-              <p className="text-gray-500">
+              <p className="text-white/80 mt-4 leading-7">
 
-                Total Jobs:
-                {" "}
-                {stats.totalJobs}
+                Tailor your resume for every job application and highlight
+                relevant skills to increase your chances of getting shortlisted.
 
               </p>
 
