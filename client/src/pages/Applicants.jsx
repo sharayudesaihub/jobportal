@@ -6,145 +6,138 @@ import RecruiterNavbar from "../components/RecruiterNavbar";
 import {
   User,
   Mail,
-  Calendar
+  Calendar,
 } from "lucide-react";
 
 function Applicants() {
-
   const { jobId } = useParams();
 
   const [applications, setApplications] = useState([]);
 
   useEffect(() => {
-
     loadApplicants();
-
   }, []);
 
   const loadApplicants = async () => {
-
     try {
-
       const token = localStorage.getItem("token");
 
       const res = await API.get(
-
         `/jobs/applications/${jobId}`,
-
         {
           headers: {
-            Authorization: token
-          }
+            Authorization: token,
+          },
         }
-
       );
 
       setApplications(res.data);
-
     } catch (error) {
-
       console.log(error);
-
     }
-
   };
 
   return (
-
     <div className="min-h-screen bg-gradient-to-br from-blue-600 via-purple-600 to-pink-500">
-
       <RecruiterNavbar />
 
-      <div className="max-w-6xl mx-auto p-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-10">
+        {/* Heading */}
 
-        <h1 className="text-4xl font-bold text-white mb-10">
+        <div className="mb-10">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white">
+            Applicants
+          </h1>
 
-          Applicants
+          <p className="text-white/80 mt-3 text-base sm:text-lg">
+            View all candidates who have applied for this job.
+          </p>
+        </div>
 
-        </h1>
+        {applications.length === 0 ? (
+          <div className="bg-white/20 backdrop-blur-xl border border-white/20 rounded-3xl p-10 sm:p-16 text-center text-white shadow-2xl">
+            <User
+              size={60}
+              className="mx-auto mb-5"
+            />
 
-        {
+            <h2 className="text-2xl sm:text-3xl font-bold">
+              No Applicants Yet
+            </h2>
 
-          applications.length === 0 ?
+            <p className="mt-4 text-base sm:text-lg text-white/90">
+              Applicants will appear here once someone applies for this job.
+            </p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+            {applications.map((app) => (
+              <div
+                key={app._id}
+                className="bg-white/20 backdrop-blur-xl border border-white/20 rounded-3xl p-6 text-white shadow-2xl hover:scale-[1.02] transition duration-300"
+              >
+                {/* Applicant Name */}
 
-          (
-
-            <div className="bg-white/20 backdrop-blur-xl rounded-3xl p-16 text-center text-white">
-
-              <h2 className="text-3xl">
-
-                No Applicants Yet
-
-              </h2>
-
-            </div>
-
-          )
-
-          :
-
-          (
-
-            <div className="grid md:grid-cols-2 gap-8">
-
-              {
-
-                applications.map((app)=>(
-
-                  <div
-
-                    key={app._id}
-
-                    className="bg-white/20 backdrop-blur-xl rounded-3xl p-6 text-white shadow-xl"
-
-                  >
-
-                    <div className="flex items-center gap-3 mb-4">
-
-                      <User />
-
-                      <h2 className="text-2xl font-bold">
-
-                        {app.applicantId.name}
-
-                      </h2>
-
-                    </div>
-
-                    <div className="flex items-center gap-3 mb-4">
-
-                      <Mail />
-
-                      {app.applicantId.email}
-
-                    </div>
-
-                    <div className="flex items-center gap-3">
-
-                      <Calendar />
-
-                      {new Date(app.createdAt).toLocaleDateString()}
-
-                    </div>
-
+                <div className="flex items-center gap-3 mb-5">
+                  <div className="bg-blue-600 p-3 rounded-full">
+                    <User size={22} />
                   </div>
 
-                ))
+                  <div>
+                    <p className="text-sm text-white/70">
+                      Applicant
+                    </p>
 
-              }
+                    <h2 className="text-xl sm:text-2xl font-bold break-words">
+                      {app.applicantId.name}
+                    </h2>
+                  </div>
+                </div>
 
-            </div>
+                {/* Email */}
 
-          )
+                <div className="flex items-start gap-3 mb-5">
+                  <div className="bg-purple-600 p-3 rounded-full">
+                    <Mail size={20} />
+                  </div>
 
-        }
+                  <div>
+                    <p className="text-sm text-white/70">
+                      Email
+                    </p>
 
+                    <p className="break-all">
+                      {app.applicantId.email}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Applied Date */}
+
+                <div className="flex items-start gap-3">
+                  <div className="bg-green-600 p-3 rounded-full">
+                    <Calendar size={20} />
+                  </div>
+
+                  <div>
+                    <p className="text-sm text-white/70">
+                      Applied On
+                    </p>
+
+                    <p>
+                      {new Date(
+                        app.createdAt
+                      ).toLocaleDateString()}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
-
     </div>
-
   );
-
 }
 
 export default Applicants;
