@@ -60,7 +60,6 @@ function EditJob() {
       });
 
       alert("Job Updated Successfully");
-
       navigate("/my-jobs");
     } catch (error) {
       alert("Update Failed");
@@ -68,21 +67,25 @@ function EditJob() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-600 via-purple-600 to-pink-500">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950">
       <RecruiterNavbar />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-10 flex justify-center">
+
         <form
           onSubmit={handleSubmit}
-          className="w-full max-w-2xl bg-white/95 backdrop-blur-xl rounded-3xl shadow-2xl p-6 sm:p-8 border border-white"
+          className="w-full max-w-2xl bg-slate-800/80 backdrop-blur-md border border-slate-700 rounded-3xl shadow-xl p-6 sm:p-8"
         >
-          <h1 className="text-3xl sm:text-4xl font-bold text-center text-gray-800 mb-8">
+
+          <h1 className="text-3xl sm:text-4xl font-bold text-center text-white mb-8">
             Edit Job
           </h1>
 
-          <div className="space-y-5">
+          <div className="space-y-6">
+
             <div>
-              <label className="block text-gray-700 font-semibold mb-2">
+
+              <label className="block text-slate-300 font-semibold mb-2">
                 Job Title
               </label>
 
@@ -91,12 +94,14 @@ function EditJob() {
                 value={formData.title}
                 onChange={handleChange}
                 placeholder="Job Title"
-                className="w-full border border-gray-300 p-3 rounded-xl outline-none focus:ring-2 focus:ring-purple-500 transition"
+                className="w-full bg-slate-900 border border-slate-700 text-white placeholder:text-slate-500 p-3 rounded-xl outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition"
               />
+
             </div>
 
             <div>
-              <label className="block text-gray-700 font-semibold mb-2">
+
+              <label className="block text-slate-300 font-semibold mb-2">
                 Company
               </label>
 
@@ -105,12 +110,14 @@ function EditJob() {
                 value={formData.company}
                 onChange={handleChange}
                 placeholder="Company"
-                className="w-full border border-gray-300 p-3 rounded-xl outline-none focus:ring-2 focus:ring-purple-500 transition"
+                className="w-full bg-slate-900 border border-slate-700 text-white placeholder:text-slate-500 p-3 rounded-xl outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition"
               />
+
             </div>
 
             <div>
-              <label className="block text-gray-700 font-semibold mb-2">
+
+              <label className="block text-slate-300 font-semibold mb-2">
                 Location
               </label>
 
@@ -119,12 +126,14 @@ function EditJob() {
                 value={formData.location}
                 onChange={handleChange}
                 placeholder="Location"
-                className="w-full border border-gray-300 p-3 rounded-xl outline-none focus:ring-2 focus:ring-purple-500 transition"
+                className="w-full bg-slate-900 border border-slate-700 text-white placeholder:text-slate-500 p-3 rounded-xl outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition"
               />
+
             </div>
 
             <div>
-              <label className="block text-gray-700 font-semibold mb-2">
+
+              <label className="block text-slate-300 font-semibold mb-2">
                 Salary
               </label>
 
@@ -133,12 +142,14 @@ function EditJob() {
                 value={formData.salary}
                 onChange={handleChange}
                 placeholder="Salary"
-                className="w-full border border-gray-300 p-3 rounded-xl outline-none focus:ring-2 focus:ring-purple-500 transition"
+                className="w-full bg-slate-900 border border-slate-700 text-white placeholder:text-slate-500 p-3 rounded-xl outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition"
               />
+
             </div>
 
             <div>
-              <label className="block text-gray-700 font-semibold mb-2">
+
+              <label className="block text-slate-300 font-semibold mb-2">
                 Job Description
               </label>
 
@@ -148,18 +159,22 @@ function EditJob() {
                 onChange={handleChange}
                 placeholder="Job Description"
                 rows={6}
-                className="w-full border border-gray-300 p-3 rounded-xl outline-none focus:ring-2 focus:ring-purple-500 transition resize-none"
+                className="w-full bg-slate-900 border border-slate-700 text-white placeholder:text-slate-500 p-3 rounded-xl outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition resize-none"
               />
+
             </div>
+
           </div>
 
           <button
             type="submit"
-            className="mt-8 w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 rounded-xl font-bold text-lg hover:scale-105 transition duration-300"
+            className="mt-8 w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-semibold text-lg transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/30"
           >
             Update Job
           </button>
+
         </form>
+
       </div>
     </div>
   );

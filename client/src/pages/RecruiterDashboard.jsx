@@ -8,6 +8,7 @@ import {
   Users,
   PlusCircle,
   FileText,
+  ArrowRight,
 } from "lucide-react";
 
 function RecruiterDashboard() {
@@ -18,9 +19,7 @@ function RecruiterDashboard() {
     totalApplications: 0,
   });
 
-  const user = JSON.parse(
-    localStorage.getItem("user")
-  );
+  const user = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
     loadStats();
@@ -43,90 +42,156 @@ function RecruiterDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-600 via-purple-600 to-pink-500">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950">
       <RecruiterNavbar />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-10">
-        {/* Welcome Section */}
 
-        <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-6 sm:p-8 shadow-2xl">
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white">
-            Welcome,{" "}
-            <span className="text-yellow-300">
-              {user?.name}
-            </span>{" "}
+        {/* Hero */}
+
+        <div className="bg-slate-800/80 backdrop-blur-md border border-slate-700 rounded-3xl p-8 shadow-2xl">
+
+          <h1 className="text-4xl lg:text-5xl font-bold text-white">
+            Welcome back,
+            <span className="text-blue-400">
+              {" "}{user?.name}
+            </span>
             👋
           </h1>
 
-          <p className="text-white/80 mt-3 text-base sm:text-lg">
-            Manage your job postings, track applications, and
-            hire the best candidates from one place.
+          <p className="text-slate-400 mt-4 text-lg leading-7 max-w-3xl">
+            Manage your job postings, monitor applications and
+            recruit top talent through one powerful dashboard.
           </p>
+
         </div>
 
         {/* Stats */}
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
-          <div className="bg-white/20 backdrop-blur-xl border border-white/20 rounded-3xl p-6 sm:p-8 text-white shadow-2xl hover:scale-[1.02] transition duration-300">
-            <Briefcase size={48} />
 
-            <h2 className="text-2xl font-bold mt-5">
-              Total Jobs
-            </h2>
+          <div className="bg-slate-800/80 border border-slate-700 rounded-3xl p-7 hover:border-blue-500 hover:-translate-y-1 transition-all duration-300">
 
-            <p className="text-4xl sm:text-5xl lg:text-6xl mt-4 font-bold">
+            <div className="w-16 h-16 rounded-2xl bg-blue-600 flex items-center justify-center mb-6">
+
+              <Briefcase
+                size={32}
+                className="text-white"
+              />
+
+            </div>
+
+            <p className="text-slate-400">
+              Total Jobs Posted
+            </p>
+
+            <h2 className="text-5xl font-bold text-white mt-3">
               {stats.totalJobs}
-            </p>
-          </div>
-
-          <div className="bg-white/20 backdrop-blur-xl border border-white/20 rounded-3xl p-6 sm:p-8 text-white shadow-2xl hover:scale-[1.02] transition duration-300">
-            <Users size={48} />
-
-            <h2 className="text-2xl font-bold mt-5">
-              Applications
             </h2>
 
-            <p className="text-4xl sm:text-5xl lg:text-6xl mt-4 font-bold">
-              {stats.totalApplications}
-            </p>
           </div>
+
+          <div className="bg-slate-800/80 border border-slate-700 rounded-3xl p-7 hover:border-green-500 hover:-translate-y-1 transition-all duration-300">
+
+            <div className="w-16 h-16 rounded-2xl bg-green-600 flex items-center justify-center mb-6">
+
+              <Users
+                size={32}
+                className="text-white"
+              />
+
+            </div>
+
+            <p className="text-slate-400">
+              Total Applications
+            </p>
+
+            <h2 className="text-5xl font-bold text-white mt-3">
+              {stats.totalApplications}
+            </h2>
+
+          </div>
+
         </div>
 
         {/* Quick Actions */}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
-          <button
-            onClick={() => navigate("/post-job")}
-            className="bg-white text-purple-700 p-5 rounded-2xl text-lg sm:text-xl font-bold hover:scale-105 transition duration-300 flex items-center justify-center gap-3 shadow-xl w-full"
-          >
-            <PlusCircle size={24} />
+        <div className="mt-10">
 
-            Post Job
-          </button>
-
-          <button
-            onClick={() => navigate("/my-jobs")}
-            className="bg-white text-purple-700 p-5 rounded-2xl text-lg sm:text-xl font-bold hover:scale-105 transition duration-300 flex items-center justify-center gap-3 shadow-xl w-full"
-          >
-            <FileText size={24} />
-
-            My Jobs
-          </button>
-        </div>
-
-        {/* Recruiter Tips */}
-
-        <div className="mt-10 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-3xl p-6 sm:p-8 shadow-2xl">
-          <h2 className="text-2xl sm:text-3xl font-bold text-white">
-            Hiring Tips 💼
+          <h2 className="text-2xl font-bold text-white mb-6">
+            Quick Actions
           </h2>
 
-          <p className="text-white mt-4 text-base sm:text-lg leading-7">
-            Keep your job descriptions clear and detailed, include
-            required skills, salary information, and respond to
-            applicants quickly to attract the best talent.
-          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+            <button
+              onClick={() => navigate("/post-job")}
+              className="bg-blue-600 hover:bg-blue-700 rounded-2xl p-6 flex items-center justify-between text-white transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/30"
+            >
+
+              <div>
+
+                <PlusCircle size={34} />
+
+                <h3 className="text-2xl font-bold mt-4">
+                  Post Job
+                </h3>
+
+                <p className="text-blue-100 mt-2">
+                  Create a new job opening.
+                </p>
+
+              </div>
+
+              <ArrowRight size={28} />
+
+            </button>
+
+            <button
+              onClick={() => navigate("/my-jobs")}
+              className="bg-slate-800 border border-slate-700 hover:border-blue-500 rounded-2xl p-6 flex items-center justify-between text-white transition-all duration-300"
+            >
+
+              <div>
+
+                <FileText size={34} />
+
+                <h3 className="text-2xl font-bold mt-4">
+                  My Jobs
+                </h3>
+
+                <p className="text-slate-400 mt-2">
+                  View, edit and manage jobs.
+                </p>
+
+              </div>
+
+              <ArrowRight size={28} />
+
+            </button>
+
+          </div>
+
         </div>
+
+        {/* Tips */}
+
+        <div className="mt-10 bg-slate-800/80 border border-slate-700 rounded-3xl p-8">
+
+          <h2 className="text-3xl font-bold text-white">
+            💡 Hiring Tips
+          </h2>
+
+          <p className="text-slate-400 mt-5 leading-8 text-lg">
+            • Write clear and attractive job titles.<br />
+            • Mention salary and required skills.<br />
+            • Keep job descriptions concise and informative.<br />
+            • Review applications regularly and respond quickly.<br />
+            • A complete job post attracts better candidates.
+          </p>
+
+        </div>
+
       </div>
     </div>
   );
